@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketingNotifications", "MarketingNotifications\MarketingNotifications.csproj", "{7C174278-6BB4-47D1-AB01-92AE27C51599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketingNotifications.Test", "MarketingNotifications.Test\MarketingNotifications.Test.csproj", "{7EEB57DD-A82F-43D7-A5E1-42171C44E853}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C174278-6BB4-47D1-AB01-92AE27C51599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C174278-6BB4-47D1-AB01-92AE27C51599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C174278-6BB4-47D1-AB01-92AE27C51599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C174278-6BB4-47D1-AB01-92AE27C51599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EEB57DD-A82F-43D7-A5E1-42171C44E853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EEB57DD-A82F-43D7-A5E1-42171C44E853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EEB57DD-A82F-43D7-A5E1-42171C44E853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EEB57DD-A82F-43D7-A5E1-42171C44E853}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
