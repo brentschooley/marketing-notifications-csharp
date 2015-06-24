@@ -32,18 +32,16 @@ namespace MarketingNotifications.Controllers
 
         // POST: Incoming
         [HttpPost]
-        public async Task<ActionResult> Incoming(string from, string body)
+        public TwiMLResult Incoming(string from, string body)
         {
-            using (var db = new SubscriberContext())
-            {
                 var isNewSubscriber = false;
 
-                var subscriber = db.Subscribers.FirstOrDefault(s => s.PhoneNumber == from);
-
+                var subscriber = _db.Subscribers.FirstOrDefault(s => s.PhoneNumber == from);
+            
                 if (subscriber == null)
                 {
                     isNewSubscriber = true;
-                    subscriber = db.Subscribers.Add(new Subscriber { PhoneNumber = from });
+                    subscriber = _db.Subscribers.Add(new Subscriber { PhoneNumber = from });
                 }
 
                 body = body.ToLower();
@@ -59,11 +57,10 @@ namespace MarketingNotifications.Controllers
                 }
 
                 // Save any changes made to the Subscriber to the database
-                await db.SaveChangesAsync();
+                _db.SaveChanges();
 
                 // Generate and return TwiML response
                 return GenerateResponse(output);
-            }
         }
 
         private string ProcessMessage(string message, Subscriber subscriber)
@@ -90,7 +87,8 @@ namespace MarketingNotifications.Controllers
             return output;
         }
 
-        private ActionResult GenerateResponse(string message)
+        // Generate TwilioResponse for testability
+        private TwiMLResult GenerateResponse(string message)
         {
             var response = new TwilioResponse();
             response.Message(message);
