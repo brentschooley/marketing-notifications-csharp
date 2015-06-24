@@ -1,16 +1,36 @@
 ﻿@using System.Web.Optimization
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-</head>
+
+
+    </head>
 <body>
-    <div>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed">
+                    <i class="fa fa-bars"></i>
+                </button>
+            <a href="/" class="navbar-brand">SMS Notifications</a>
+           </div>
+        </div>
+    </div>
+
+    <div id="main" class="container">
         @RenderBody()
     </div>
+
+        <footer class="container">
+            Made with <i class="fa fa-heart"></i> by your pals at 
+            <a href="http://www.twilio.com">Twilio</a>.
+        </footer>
+
+    </div> <!-- /container -->
 </body>
 </html>

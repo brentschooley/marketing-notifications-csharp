@@ -25,11 +25,17 @@ namespace MarketingNotifications.Controllers
         }
 
         // GET: Notifications
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index(string message, string imageUrl)
+        {
+            return View();
+        }
         // POST: Incoming
         [HttpPost]
         public TwiMLResult Incoming(string from, string body)
