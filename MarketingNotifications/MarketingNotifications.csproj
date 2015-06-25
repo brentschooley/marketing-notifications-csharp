@@ -144,6 +144,9 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="AppSettings.config" />
+    <None Include="Properties\PublishProfiles\csharpmarketing.pubxml" />
+    <None Include="Properties\PublishProfiles\marketingcsharp.pubxml" />
+    <None Include="Properties\PublishProfiles\marketingsms.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -159,6 +162,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Alert.cs" />
+    <Compile Include="Migrations\201506252021044_Create.cs" />
+    <Compile Include="Migrations\201506252021044_Create.Designer.cs">
+      <DependentUpon>201506252021044_Create.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Subscriber.cs" />
     <Compile Include="Models\TestDbSet.cs" />
@@ -179,6 +186,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506252021044_Create.resx">
+      <DependentUpon>201506252021044_Create.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

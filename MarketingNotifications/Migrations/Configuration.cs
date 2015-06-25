@@ -9,7 +9,7 @@ namespace MarketingNotifications.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(MarketingNotifications.Models.SubscriberContext context)

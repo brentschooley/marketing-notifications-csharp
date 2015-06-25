@@ -23,7 +23,15 @@ namespace MarketingNotifications.Models
                 ConfigurationManager.AppSettings["TwilioAuthToken"]
             );
                 
-            client.SendMessage(twilioNumber, this.PhoneNumber, message, new string[] { imageUrl });     
+            if(imageUrl != "")
+            {
+                client.SendMessage(twilioNumber, this.PhoneNumber, message, new string[] { imageUrl });    
+            }
+            else
+            {
+                client.SendMessage(twilioNumber, this.PhoneNumber, message);
+            }
+             
         }
     }
 
