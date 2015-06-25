@@ -32,42 +32,51 @@ namespace MarketingNotifications.Controllers
             return View();
         }
 
+        // POST: Notifications
         [HttpPost]
         public ActionResult Index(string message, string imageUrl)
         {
+            try
+            {
+                foreach (var subscriber in _db.Subscribers.Where(s => s.Subscribed))
+                {
+                    subscriber.SendMessage(message, imageUrl);
+                }
+
+                SuccessAlert("Messages are on their way!");
+            }
+            catch
+            {
+                ErrorAlert("Something went wrong. Try again.");
+            }
+            
             return View();
         }
+
         // POST: Incoming
         [HttpPost]
         public TwiMLResult Incoming(string from, string body)
         {
-                var isNewSubscriber = false;
+            string response;
+            Subscriber subscriber = _db.Subscribers.FirstOrDefault(s => s.PhoneNumber == from);
 
-                var subscriber = _db.Subscribers.FirstOrDefault(s => s.PhoneNumber == from);
-            
-                if (subscriber == null)
-                {
-                    isNewSubscriber = true;
-                    subscriber = _db.Subscribers.Add(new Subscriber { PhoneNumber = from });
-                }
+            if (subscriber == null)
+            {
+                // If subscriber not found, create new subscriber and return signup prompt.
+                subscriber = _db.Subscribers.Add(new Subscriber { PhoneNumber = from });
+                response = "Thanks for contacting us! Text 'subscribe' if you would like to receive updates via text message.";
+            }
+            else
+            {
+                // Otherwise, process the message for existing subscriber.
+                response = ProcessMessage(body.ToLower(), subscriber);
+            }
 
-                body = body.ToLower();
+            // Save any changes made to the Subscriber to the database
+            _db.SaveChanges();
 
-                string output;
-                if (isNewSubscriber)
-                {
-                    output = "Thanks for contacting TWBC! Text 'subscribe' if you would to receive updates via text message.";
-                }
-                else
-                {
-                    output = ProcessMessage(body, subscriber);
-                }
-
-                // Save any changes made to the Subscriber to the database
-                _db.SaveChanges();
-
-                // Generate and return TwiML response
-                return GenerateResponse(output);
+            // Generate and return TwiML response
+            return GenerateTwiML(response);
         }
 
         private string ProcessMessage(string message, Subscriber subscriber)
@@ -94,20 +103,19 @@ namespace MarketingNotifications.Controllers
             return output;
         }
 
-        // Generate TwilioResponse for testability
-        private TwiMLResult GenerateResponse(string message)
+        private TwiMLResult GenerateTwiML(string message)
         {
             var response = new TwilioResponse();
             response.Message(message);
             return TwiML(response);
         }
 
+        #region Alerts
         private void AddAlert(string alertStyle, string message, bool dismissable)
         {
             var alerts = TempData.ContainsKey(Alert.TempDataKey)
                 ? (List<Alert>)TempData[Alert.TempDataKey]
                 : new List<Alert>();
-
             alerts.Add(new Alert
             {
                 AlertStyle = alertStyle,
@@ -117,5 +125,16 @@ namespace MarketingNotifications.Controllers
 
             TempData[Alert.TempDataKey] = alerts;
         }
+
+        public void SuccessAlert(string message, bool dismissable = false)
+        {
+            AddAlert(AlertStyles.Success, message, dismissable);
+        }
+
+        public void ErrorAlert(string message, bool dismissable = false)
+        {
+            AddAlert(AlertStyles.Danger, message, dismissable);
+        }
+        #endregion
     }
 }

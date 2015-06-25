@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,13 @@ namespace MarketingNotifications.Models
 
         public void SendMessage(string message, string imageUrl)
         {
-
+            var twilioNumber = ConfigurationManager.AppSettings["TwilioPhoneNumber"];
+            var client = new TwilioRestClient(
+                ConfigurationManager.AppSettings["TwilioAccountSid"],
+                ConfigurationManager.AppSettings["TwilioAuthToken"]
+            );
+                
+            client.SendMessage(twilioNumber, this.PhoneNumber, message, new string[] { imageUrl });     
         }
     }
 
