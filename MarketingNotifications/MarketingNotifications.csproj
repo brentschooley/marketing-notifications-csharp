@@ -157,6 +157,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Alert.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Subscriber.cs" />
     <Compile Include="Models\TestDbSet.cs" />

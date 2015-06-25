@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio;
 
 namespace MarketingNotifications.Models
 {
@@ -12,6 +13,11 @@ namespace MarketingNotifications.Models
         public int Id { get; set; }
         public string PhoneNumber { get; set; }
         public bool Subscribed { get; set; }
+
+        public void SendMessage(string message, string imageUrl)
+        {
+
+        }
     }
 
     public interface ISubscriberContext

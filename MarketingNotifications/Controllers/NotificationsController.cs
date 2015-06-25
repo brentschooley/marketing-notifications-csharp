@@ -8,6 +8,7 @@ using Twilio.TwiML;
 using Twilio.TwiML.Mvc;
 using MarketingNotifications.Models;
 using System.Threading.Tasks;
+using MarketingNotifications.Helpers;
 
 namespace MarketingNotifications.Controllers
 {
@@ -99,6 +100,22 @@ namespace MarketingNotifications.Controllers
             var response = new TwilioResponse();
             response.Message(message);
             return TwiML(response);
+        }
+
+        private void AddAlert(string alertStyle, string message, bool dismissable)
+        {
+            var alerts = TempData.ContainsKey(Alert.TempDataKey)
+                ? (List<Alert>)TempData[Alert.TempDataKey]
+                : new List<Alert>();
+
+            alerts.Add(new Alert
+            {
+                AlertStyle = alertStyle,
+                Message = message,
+                Dismissable = dismissable
+            });
+
+            TempData[Alert.TempDataKey] = alerts;
         }
     }
 }
