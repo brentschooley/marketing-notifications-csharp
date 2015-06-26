@@ -88,7 +88,7 @@ namespace MarketingNotifications.Controllers
                 subscriber.Subscribed = message == "subscribe";
                 if (subscriber.Subscribed)
                 {
-                    output = "You are now subscribed for updates.";
+                    output = "You are now subscribed for updates. Text 'stahp' at any time to stop receiving updates.";
                 }
                 else
                 {
