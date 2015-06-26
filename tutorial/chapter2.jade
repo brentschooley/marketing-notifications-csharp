@@ -23,6 +23,8 @@
     ## Handling a Subscription Command
 
     If the user has texted `subscribe` or `stahp`, we will update their subscription status in the database. We will then respond to them via SMS with the opposite command to either opt in to updates or opt out.
+    
+    Note: We have chosen not to use `unsubscribe` as a keyword because it opts the texter out of receiving future text messages from our Twilio number. More details on this can be found [here](https://www.twilio.com/help/faq/sms/does-twilio-support-stop-block-and-cancel-aka-sms-filtering).
 
 .step(data-title='Listing Available Commands', data-file='MarketingNotifications/Controllers/NotificationsController.cs', data-highlight='98-101')
   :markdown
