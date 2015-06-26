@@ -15,7 +15,7 @@ namespace MarketingNotifications
 
             routes.MapRoute(
                 name: "Messages",
-                url: "messages",
+                url: "message",
                 defaults: new { controller = "Notifications", action = "Incoming" }
             );
 
